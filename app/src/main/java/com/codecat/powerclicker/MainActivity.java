@@ -2,6 +2,7 @@ package com.codecat.powerclicker;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,8 +16,10 @@ public class MainActivity extends AppCompatActivity {
     private int player1Score = 0;
     private int player2Score = 0;
 
+    private int progressStatus = 100;
     private TextView tvScore1, tvScore2;
     private ImageView imageView1, imageView2;
+    private ProgressBar progressBar1;
 
 
     @Override
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tvScore2 = findViewById(R.id.tvScore2);
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
+        progressBar1 = findViewById(R.id.progressBar);
 
         imageView1.setOnClickListener(v ->{
             player1Score++;
