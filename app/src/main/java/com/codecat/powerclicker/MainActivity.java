@@ -44,22 +44,52 @@ public class MainActivity extends AppCompatActivity {
         tvInfo = findViewById(R.id.tvInfo);
         btnStart = findViewById(R.id.btnStart);
 
+        imageView1.setImageResource(R.drawable.rikishi_0);
+        imageView2.setImageResource(R.drawable.rikishi_0);
+
+        imageView1.setRotation(-90);
+        imageView2.setRotation(90);
+
+        imageView1.setTranslationX(-300);
+        imageView2.setTranslationX(300);
+
         progressBar1.setProgress(progressStatus);
 
         imageView1.setOnClickListener(v ->{
+            if (!gameStarted){
+                return;
+            }
             progressStatus = progressStatus - 10;
             progressBar1.setProgress(progressStatus);
             player1Score++;
             tvScore1.setText("" + player1Score);
+            imageView1.setScaleX(1.25f);
+            imageView1.setScaleY(1.25f);
+            new Handler().postDelayed(() -> {
+                imageView1.setScaleX(1.0f);
+                imageView1.setScaleY(1.0f);
+            },50);
         });
         imageView2.setOnClickListener(v ->{
+            if (!gameStarted){
+                return;
+            }
             progressStatus = progressStatus + 10;
             progressBar1.setProgress(progressStatus);
             player2Score++;
             tvScore2.setText("" + player2Score);
+            imageView2.setScaleX(1.25f);
+            imageView2.setScaleY(1.25f);
+            new Handler().postDelayed(() -> {
+                imageView2.setScaleX(1.0f);
+                imageView2.setScaleY(1.0f);
+            },50);
         });
 
         btnStart.setOnClickListener(v -> {
+            imageView1.animate().translationX(550).setDuration(3000);
+            imageView2.animate().translationX(-550).setDuration(3000);
+            tvInfo.setVisibility(TextView.VISIBLE);
             tvInfo.setText("3");
             new Handler().postDelayed(() -> {
                 tvInfo.setText("2");
@@ -70,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> {
                 tvInfo.setText("Start!");
                 gameStarted = true;
+                tvInfo.setVisibility(TextView.INVISIBLE);
             },3000);
         });
     }
